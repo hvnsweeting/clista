@@ -9,17 +9,21 @@ def main():
     # write st app dynamically or gen code?
     # use template or AST?
     argp = argparse.ArgumentParser()
-    argp.add_argument("--sample", action="store_true", help="Generate sample program from `hey` CLI tool")
+    argp.add_argument(
+        "--sample",
+        action="store_true",
+        help="Generate sample program from `hey` CLI tool",
+    )
     args = argp.parse_args()
     if args.sample:
-        import clist.hey_help as hey_help
+        import clista.hey_help as hey_help
 
         generate_streamlit_app(hey_help.text.strip())
     else:
         generate_streamlit_app(sys.stdin.read().strip())
 
 
-def generate_streamlit_app(cli_help, outfile="stapp.py.gen"):
+def generate_streamlit_app(cli_help, appfile="stapp.py"):
     STREAMLIT_APP = """
 import subprocess
 import streamlit as st
@@ -60,10 +64,11 @@ if run:
 """
 
     end = APP_END % (name)
-    with open("stapp.py.gen", "wt") as f:
+    with open(appfile, "wt") as f:
         f.write("\n".join(stapp + end.splitlines()))
         print(
-            "Wrote stapp.py.gen, please copy as stapp.py, edit as needed then run streamlit run stapp.py"
+            "Wrote stapp.py, please copy and edit as needed then run streamlit run stapp.py"
         )
+        print("NOTE: rerun would overwrite stapp.py")
 
     # run the app via streamlit when option passed

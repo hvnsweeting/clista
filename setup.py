@@ -1,4 +1,5 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 setup(
-    entry_points={"console_scripts": ["clist=clist:main"]},
+    install_requires=["streamlit"],
+    entry_points={"console_scripts": ["clista=clista:main"]},
 )

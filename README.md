@@ -1,5 +1,5 @@
 # clista - CLI to STreamlit App
-Create interactive web app from any CLI with streamlit
+Create interactive web app from any CLI with [streamlit](https://github.com/streamlit/streamlit)
 
 ## Status
 Very early alpha version, tested only with `hey`.
@@ -15,9 +15,9 @@ There are different ways to do task "benchmark a website"
 
 - Type the command to run it then copy the output and write to the report.
 - Write a script to run the command 10 times then copy the output and write to the report.
-- Learn Jupyter and run the command from there, export the notebook as Playbook and use as report.
-- Write a webapp to run the command and display the result (take 2 months, and 5 people).
-- Write a streamlit app and let who give the task run themselves, as they need.
+- Learn Jupyter and run the command from there, plot statistics results, export the notebook as Playbook and use as report.
+- Write a SPA to run the command with a micro-service backend and display the result (take 2 months, and 5 people).
+- Write a streamlit app and let who give the task run themselves, as they need, generates report with fancy statistics result on-fly.
 
 ## Use-cases
 - Build one-time-used internal tool

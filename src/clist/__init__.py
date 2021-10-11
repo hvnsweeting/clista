@@ -4,15 +4,17 @@ import streamlit as st
 """
 def main():
     print("CLIST")
-    # get help msg of the command
+    # write st app dynamically or gen code?
+    # use template or AST?
 
-    # parse to get the command, the required arg
-    # Usage: hey [options...] <url>
     stapp = [STREAMLIT_APP]
 
+    # get help msg of the command
     with open("heyhelp.txt") as f:
         lines = [i for i in f.readlines() if i.strip()]
 
+    # parse to get the command, the required arg
+    # Usage: hey [options...] <url>
     usage_msg = lines[0]
     _usage, name, *_, cmd_arg = usage_msg.split()
 
@@ -28,21 +30,25 @@ def main():
         stapp.append(f"x = st.text_input(f'{msg.strip()}')")
 
 
-    stapp.append('run =st.button("run")')
-    stapp.append('if not run: exit()')
     # TODO get what use input an turn to cmd args
     opts=[]
-    stapp.append(f'name = "{name}"')
-    stapp.append(f'opts = []')
-    stapp.append(f'cmd = [name, *opts, cmd_arg]')
-    stapp.append('st.write(f"Running {cmd}")')
-    stapp.append('p = subprocess.run(cmd, check=True, capture_output=True)')
-    stapp.append('st.markdown("```\\n" + p.stdout.decode("utf-8") + "\\n```")')
+
+    APP_END = """
+run =st.button("run")
+if run:
+    name = "%s"
+    opts = []
+    cmd = [name, *opts, cmd_arg]
+    st.write(f"Running {cmd}")
+    p = subprocess.run(cmd, check=True, capture_output=True)
+    st.markdown("```\\n" + p.stdout.decode("utf-8") + "\\n```")
+"""
+
+    end = APP_END % (name)
     with open("stapp.py", "wt") as f:
-        f.write("\n".join(stapp))
+        f.write("\n".join(stapp + end.splitlines()))
         print("Wrote stapp.py")
 
-    # write st app dynamically or gen code?
     # parse all options, turn to a text field
 
     # have a button to execute

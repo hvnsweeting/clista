@@ -25,7 +25,7 @@ def main():
     opt_msg = {}
     for line in options:
         opt, msg = line.split(maxsplit=1)
-        opt_msg[opt.strip("-")] = msg.strip()
+        opt_msg[opt.strip("-")] = line.strip()
 
         stapp.append(f"x = st.text_input(f'{msg.strip()}')")
 
